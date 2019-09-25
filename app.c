@@ -1,58 +1,99 @@
-/*
- * app.c
+/******************************************************************************
  *
- *  Created on: Sep 20, 2019
- *      Author: Rafaat
- */
+ * Module: API
+ *
+ * File Name: app.c
+ *
+ * Description: Main function of project (application layer)
+ *
+ * Author: Ahmed Wael
+ *
+ *******************************************************************************/
 
 #include "dio.h"
 #include "seven_segment.h"
 #include "regs.h"
 #include "timer.h"
-#include <avr/interrupt.h>
-
+/*
 int main(void){
-	Dio_init();
-	displayDigit(5);
-	while(1);
+
+}
+ */
+
+
+#include "icu.h"
+
+uint8 g_edgeCount = 0;
+uint16 g_timeHigh = 0;
+uint16 g_timePeriod = 0;
+uint16 g_timePeriodPlusHigh = 0;
+
+void APP_edgeProcessing(void)
+{
+	g_edgeCount++;
+	if(g_edgeCount == 1)
+	{
+		/*
+		 * Clear the timer counter register to start measurements from the
+		 * first detected rising edge
+		 */
+		Icu_clearTimerValue();
+		/* Detect falling edge */
+		Icu_setEdgeDetectionType(FALLING);
+	}
+	else if(g_edgeCount == 2)
+	{
+		/* Store the High time value */
+		g_timeHigh = Icu_getInputCaptureValue();
+		/* Detect rising edge */
+		Icu_setEdgeDetectionType(RISING);
+	}
+	else if(g_edgeCount == 3)
+	{
+		/* Store the Period time value */
+		g_timePeriod = Icu_getInputCaptureValue();
+		/* Detect falling edge */
+		Icu_setEdgeDetectionType(FALLING);
+	}
+	else if(g_edgeCount == 4)
+	{
+		/* Store the Period time value + High time value */
+		g_timePeriodPlusHigh = Icu_getInputCaptureValue();
+		/* Clear the timer counter register to start measurements again */
+		Icu_clearTimerValue();
+		/* Detect rising edge */
+		Icu_setEdgeDetectionType(RISING);
+	}
 }
 
-/*
-void delay(uint32 x);
-uint32 Digit= 0;
 int main()
 {
-	Dio_init();
-	displayDigit(7);
-	Timer_init(TIMER0);
-	//if(c == OK)
-	//displayDigit(0);
-	sei();
+	uint32 dutyCycle = 0;
+
+	/* Create configuration structure for ICU driver */
+	Icu_ConfigType Icu_Config = {F_CPU_CLOCK,RISING};
+
+	/* Enable Global Interrupt I-Bit */
+	SREG |= (1<<7);
+
+	/* Set the Call back function pointer in the ICU driver */
+	Icu_setCallBack(APP_edgeProcessing);
+
+	/* Initialize both the LCD and ICU driver */
+
+	Icu_init(&Icu_Config);
+
 	while(1)
 	{
-		Dio_write(PORT_D,PIN0,HIGH);
-		delay(1000);
-		Dio_write(PORT_D,PIN0,LOW);
-		delay(1000);
-		//_delay_ms(100);
+		if(g_edgeCount == 4)
+		{
+			Icu_DeInit(); /* Disable ICU Driver */
+			g_edgeCount = 0;
+			/* calculate the dutyCycle */
+			dutyCycle = ((float)(g_timePeriodPlusHigh-g_timePeriod) / (g_timePeriodPlusHigh - g_timeHigh)) * 100;
+			/* display the dutyCycle on LCD screen */
+			displayDigit(8);
+		}
 	}
-	return 0;
-}
-/*just for polling */
-
-/*
-void delay(uint32 x)
-{
-	while(Digit != x);
-	Digit = 0;
-}
-uint8 flag = 0;
-ISR(TIMER0_OVF_vect)
-{
-
-	TCNT0 = 129;
-	Digit++;
-	flag = 1;
 }
 
-*/
