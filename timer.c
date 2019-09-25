@@ -12,26 +12,23 @@
 
 #include "timer.h"
 
-/*
+
 static volatile void (*g_callBackPtr)(void) = NULL_PTR;
 
 ISR(TIMER0_OVF_vect){
-	if(g_callBackPtr != NULL_PTR)
-	{
-		 Call the Call Back function in the application
+	if(g_callBackPtr != NULL_PTR){
+		//Call the Call Back function in the application
 		(*g_callBackPtr)();
 	}
+}
 
- */
 /*
  * SetCallBackFunction Definition
  */
-/*
-	void Icu_setCallBack(void(*a_ptr)(void)){
-		 Save the address of the Call back function in a global pointer
-		g_callBackPtr = a_ptr;
-	}
- */
+void Icu_setCallBack(void(*a_ptr)(void)){
+	//Save the address of the Call back function in a global pointer
+	g_callBackPtr = a_ptr;
+}
 
 /*
  * init Function Definition
@@ -369,3 +366,33 @@ uint8 Timer_init(uint8 id){
 	return status;
 }
 
+
+uint8 PWM_init(uint8 id,uint8 duty_cycle){
+	uint16 pwm_val=0;
+	uint8 status;
+	switch(Timer_Config_arr[id].Type){
+	case TIMER0 :
+		Timer_Config_arr[id].Mode = FAST_PWM_MODE;
+		Timer_Config_arr[id].Outcomp = FAST_PWM;
+		Timer_Config_arr[id].Outcomp_Mode = OC_CLEAR_FAST_PWM;
+		pwm_val = (duty_cycle*255)/100;
+		OCR0 = pwm_val;
+		break;
+	case TIMER2 :
+		Timer_Config_arr[id].Mode = FAST_PWM_MODE;
+		Timer_Config_arr[id].Outcomp = FAST_PWM;
+		Timer_Config_arr[id].Outcomp_Mode = OC_CLEAR_FAST_PWM;
+		pwm_val = (duty_cycle*255)/100;
+		OCR2 = pwm_val;
+		break;
+	case TIMER1 :
+		Timer_Config_arr[id].Mode = FAST_PWM_MODE;
+		Timer_Config_arr[id].Outcomp = FAST_PWM;
+		Timer_Config_arr[id].Outcomp_Mode = OC_CLEAR_FAST_PWM;
+		pwm_val = (duty_cycle*65536)/100;
+		OCR2 = pwm_val;
+	default :
+		status =NOK;
+	}
+	return status;
+}

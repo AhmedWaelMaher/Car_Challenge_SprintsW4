@@ -32,8 +32,10 @@
  * Functions Prototypes
  */
 uint8 Timer_init(uint8 id);
-uint8 Timer_PWM(uint8 type,uint8 duty_cycle);
-uint8 Timer_delay(uint8 type,uint8 time);
+uint8 PWM_init(uint8 id,uint8 duty_cycle);
+void Icu_setCallBack(void(*a_ptr)(void));
+void Timer_start(void);
+void Timer_stop(void);
 uint8 Timer_Deinit(void);
 
 #endif /* TIMER_H_ */

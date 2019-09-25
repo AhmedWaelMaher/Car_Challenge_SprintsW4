@@ -29,9 +29,9 @@
 /*
  * Timer Types
  */
-#define TIMER0 		 0
-#define TIMER1		 1
-#define TIMER2 		 2
+#define TIMER0 		  0
+#define TIMER1		  1
+#define TIMER2 		  2
 #define NUM_OF_TIMERS 3
 
 /*
