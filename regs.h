@@ -65,18 +65,6 @@
 #define TCNT2  (*((volatile uint8*)0x44))
 #define OCR2  (*((volatile uint8*)0x43))
 
-enum
-{
-	input,
-	output
-};
-
-enum
-{
-	low,
-	high
-};
-
 typedef enum
 {
 	pa0,pa1,pa2,pa3,pa4,pa5,pa6,pa7,
