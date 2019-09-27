@@ -19,6 +19,8 @@
  */
 #include "regs.h"
 #include "timer_confg.h"
+#include "dio.h"
+#include "seven_segment.h"
 #include <avr/interrupt.h>
 
 #ifndef NOK
@@ -32,7 +34,7 @@
  * Functions Prototypes
  */
 uint8 Timer_init(uint8 id);
-uint8 PWM_init(uint8 id,uint8 duty_cycle);
+uint8 PWM_init(uint8 id,uint32 duty_cycle);
 void Icu_setCallBack(void(*a_ptr)(void));
 void Timer_start(void);
 void Timer_stop(void);

@@ -13,6 +13,8 @@
 #ifndef DIO_REGS_H
 #define DIO_REGS_H
 
+#define NULL_PTR ((void*)0)
+
 #include "std_types.h"
 
 /* Definition for PORTA Registers */
