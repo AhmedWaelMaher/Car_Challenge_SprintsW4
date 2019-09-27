@@ -41,4 +41,3 @@ void MOTOR_reverse(void){
 void MOTOR_stop(void){
 	Dio_write(PORT_C,PIN0,LOW);
 	Dio_write(PORT_C,PIN1,LOW);
-}

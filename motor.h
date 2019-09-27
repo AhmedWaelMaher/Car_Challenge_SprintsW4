@@ -15,9 +15,16 @@
 
 #include "dio.h"
 
-extern void MOTOR_state(void);
+/*
+ * Functions Prototypes for motor driver
+ */
+extern void MOTOR_state(void);//state of motor
+
 extern void MOTOR_forward(void);
+
 extern void MOTOR_reverse(void);
+
+
 extern void MOTOR_stop(void);
 
 #endif /* MOTOR_H_ */
