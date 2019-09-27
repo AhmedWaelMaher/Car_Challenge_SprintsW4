@@ -23,7 +23,7 @@
 
 void wait(void);
 void delay(uint32 delay,uint8 timer_type,void(*a_ptr)(void));
-//PWM function
+void PWM_init(void(*a_ptr)(void));
 
 #endif  SERVICE_H_
 

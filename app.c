@@ -18,7 +18,7 @@
 #include "motor.h"
 
 void App(void){
-	static uint8 count =0;
+	/*static uint8 count =0;
 	static uint8 overflow =0;
 	static uint8 digit =0;
 	if(count == 0){
@@ -44,20 +44,39 @@ void App(void){
 			displayDigit(digit);
 			overflow =0;
 		}
+	}*/
+	DDRA |= (1<<7);
+	static uint32 overflow =0;
+	static uint8 flag =0;
+	overflow++;
+	if(0 == flag){
+		TCNT0 = 60;
+		if(31 == overflow){
+			PORTA ^= (1<<7);
+			overflow =0;
+			TCNT0 = 100;
+			flag =1;
+		}
 	}
-
-
-
+	else if(1 ==flag){
+		TCNT0 = 240;
+		if(31 == overflow){
+			PORTA ^= (1<<7);
+			overflow =0;
+			TCNT0 = 100;
+			flag =0;
+		}
+	}
 }
 
 int main(void){
 	Dio_init();
 	Timer_init(TIMER0);
 	sei();
-	MOTOR_state();
-	//PWM_init(TIMER0,50);
+	//MOTOR_state();
+	PWM_init(App);
 
-	delay(1000,TIMER0,App);
+	//delay(1000,TIMER0,App);
 	while(1);
 	return 0;
 }

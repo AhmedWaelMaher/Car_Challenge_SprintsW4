@@ -15,12 +15,14 @@
 
 static volatile void (*l_callBackPtr)(void) = NULL_PTR;
 static volatile void (*g_callBackPtr)(void) = NULL_PTR;
+static volatile void (*g_callBackPtr_PWM)(void) = NULL_PTR;
+
 uint32 g_var;
 
 ISR(TIMER0_OVF_vect){
 
-	if(*l_callBackPtr != NULL_PTR){
-		(*l_callBackPtr)();
+	if(*g_callBackPtr_PWM != NULL_PTR){
+		(*g_callBackPtr_PWM)();
 	}
 }
 
@@ -44,5 +46,10 @@ void delay(uint32 delay,uint8 timer_type,void(*a_ptr)(void)){
 	g_var = delay;
 	TCNT0 = 0;
 	TCCR0 |= (1<<FOC0);
+	TIMSK |= (1<<TOIE0);
+}
+
+void PWM_init(void(*a_ptr)(void)){
+	g_callBackPtr_PWM = a_ptr;
 	TIMSK |= (1<<TOIE0);
 }
