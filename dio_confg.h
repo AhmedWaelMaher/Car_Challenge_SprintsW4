@@ -15,7 +15,7 @@
 
 #include "std_types.h"
 
-typedef enum{SEGA,SEGB,SEGC,SEGD,SERVO1,SERVO2,pmw,NUM_OF_PINS}pins;
+typedef enum{SEGA,SEGB,SEGC,SEGD,SERVO1,SERVO2,NUM_OF_PINS}pins;
 
 #define PORT_A 0
 #define PORT_B 1
@@ -43,9 +43,7 @@ typedef enum{SEGA,SEGB,SEGC,SEGD,SERVO1,SERVO2,pmw,NUM_OF_PINS}pins;
 #define INITIALIZED			1
 #define NOT_INITIALIZED		0
 
-#ifndef NA
-#define NA			0xFF
-#endif
+#define NA			0xff
 
 typedef struct {
 	uint8 Port;

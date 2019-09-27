@@ -21,8 +21,8 @@ uint32 g_var;
 
 ISR(TIMER0_OVF_vect){
 
-	if(*g_callBackPtr_PWM != NULL_PTR){
-		(*g_callBackPtr_PWM)();
+	if(*g_callBackPtr != NULL_PTR){
+		(*g_callBackPtr)();
 	}
 }
 
@@ -30,8 +30,6 @@ void wait(void){
 	static uint32 counts =0;
 	counts++;
 	if(counts == g_var){
-		DDRB |= (1<<0);
-		PORTB ^= (1<<0);
 		counts =0;
 		if((*g_callBackPtr != NULL_PTR)){
 

@@ -13,7 +13,8 @@
 #include "dio.h"
 
 uint8 Dio_init(void){
-	uint8 index,status;
+	uint8 status = OK;
+	uint8 index;
 	if(NUM_OF_PINS < MAX_NUM_OF_PINS){
 		for(index=0;index<NUM_OF_PINS;index++){
 			Dio_Config_arr[index].Init = INITIALIZED;
@@ -162,7 +163,7 @@ uint8 Dio_init(void){
 }
 
 uint8 Dio_read(uint8 port,uint8 pin,uint8 * val){
-	uint8 status;
+	uint8 status = OK;
 	uint8 index;
 	for(index=0;index<NUM_OF_PINS;index++){
 		if((Dio_Config_arr[index].Port == port) && (Dio_Config_arr[index].Pin == pin)){
@@ -197,7 +198,7 @@ uint8 Dio_read(uint8 port,uint8 pin,uint8 * val){
 }
 
 uint8 Dio_write(uint8 port,uint8 pin,uint8 val){
-	uint8 status;
+	uint8 status = OK;
 	uint8 index;
 	for(index=0;index<NUM_OF_PINS;index++){
 		if((Dio_Config_arr[index].Port == port) && (Dio_Config_arr[index].Pin == pin)){

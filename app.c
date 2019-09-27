@@ -18,12 +18,12 @@
 #include "motor.h"
 
 void App(void){
-	/*static uint8 count =0;
-	static uint8 overflow =0;
+	static uint8 count =0;
+	static uint32 overflow =0;
 	static uint8 digit =0;
 	if(count == 0){
 		overflow++;
-		if(31 == overflow){
+		if(31000 == overflow){
 			++digit;
 			if(digit == 9){
 				MOTOR_state();
@@ -35,7 +35,7 @@ void App(void){
 	}
 	else if(count == 1){
 		overflow++;
-		if(31 == overflow){
+		if(31000 == overflow){
 			--digit;
 			if(digit == 0){
 				MOTOR_state();
@@ -44,8 +44,8 @@ void App(void){
 			displayDigit(digit);
 			overflow =0;
 		}
-	}*/
-	DDRA |= (1<<7);
+	}
+	/*DDRA |= (1<<7);
 	static uint32 overflow =0;
 	static uint8 flag =0;
 	overflow++;
@@ -66,17 +66,17 @@ void App(void){
 			TCNT0 = 100;
 			flag =0;
 		}
-	}
+	}*/
 }
 
 int main(void){
 	Dio_init();
 	Timer_init(TIMER0);
 	sei();
-	//MOTOR_state();
-	PWM_init(App);
+	MOTOR_state();
+	//PWM_init(App);
 
-	//delay(1000,TIMER0,App);
+	delay(1000,TIMER0,App);
 	while(1);
 	return 0;
 }

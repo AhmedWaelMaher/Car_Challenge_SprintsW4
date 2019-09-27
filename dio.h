@@ -16,15 +16,10 @@
 #include "regs.h"
 #include "dio_confg.h"
 
-#ifndef NOK
-#define NOK 0
-#endif
-
-#ifndef OK
-#define OK 1
-#endif
-
 #define MAX_NUM_OF_PINS (uint8)32
+
+#define OK 1
+#define NOK 0
 
 uint8 Dio_init(void);
 uint8 Dio_read(uint8 port,uint8 pin,uint8 * val);
