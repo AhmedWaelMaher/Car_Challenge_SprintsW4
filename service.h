@@ -1,4 +1,4 @@
- /******************************************************************************
+/******************************************************************************
  *
  * Module: Service Layer Header
  *
@@ -20,10 +20,11 @@
 /*
  * Function Prototypes
  */
+extern void wait(void);//Function for call back notfication
 
-void wait(void);
-void delay(uint32 delay,uint8 timer_type,void(*a_ptr)(void));
-void PWM_init(void(*a_ptr)(void));
+extern void delay(uint32 delay,uint8 timer_type,void(*a_ptr)(void));//Delay Function
+
+extern void PWM_init(void(*a_ptr)(void));//PWM initialization Function
 
 #endif  SERVICE_H_
 

@@ -1,4 +1,4 @@
- /******************************************************************************
+/******************************************************************************
  *
  * Module: Dio Configuration Header
  *
@@ -15,6 +15,7 @@
 
 #include "std_types.h"
 
+// used pins
 typedef enum{SEGA,SEGB,SEGC,SEGD,SERVO1,SERVO2,NUM_OF_PINS}pins;
 
 #define PORT_A 0
@@ -37,14 +38,20 @@ typedef enum{SEGA,SEGB,SEGC,SEGD,SERVO1,SERVO2,NUM_OF_PINS}pins;
 #define HIGH		1
 #define LOW			0
 
-#define PULLUP		1
-#define EXTRES		0
-
 #define INITIALIZED			1
 #define NOT_INITIALIZED		0
 
+/*
+ * Pull up OR External resistors
+ */
+#define PULLUP		1
+#define EXTRES		0
+
 #define NA			0xff
 
+/*
+ * Dio structure
+ */
 typedef struct {
 	uint8 Port;
 	uint8 Dir;
@@ -54,6 +61,9 @@ typedef struct {
 	uint8 Init;
 }Dio_Config;
 
+/*
+ * array of structures
+ */
 extern Dio_Config Dio_Config_arr[NUM_OF_PINS];
 
 #endif /* DIO_CONFG_H_ */

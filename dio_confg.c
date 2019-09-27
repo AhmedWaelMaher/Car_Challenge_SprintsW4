@@ -12,6 +12,9 @@
 
 #include "dio_confg.h"
 
+/*
+ * User input configurations
+ */
 Dio_Config Dio_Config_arr[NUM_OF_PINS] = {
 		{PORT_A,OUTPUT,PIN0,LOW,NA,NOT_INITIALIZED},
 		{PORT_A,OUTPUT,PIN1,LOW,NA,NOT_INITIALIZED},

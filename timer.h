@@ -33,8 +33,8 @@
 /*
  * Functions Prototypes
  */
-uint8 Timer_init(uint8 id);
+extern uint8 Timer_init(uint8 id);
 //uint8 PWM_init(uint8 id,uint32 duty_cycle);
-uint8 Timer_Deinit(void);
+extern uint8 Timer_Deinit(void);
 
 #endif /* TIMER_H_ */

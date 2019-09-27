@@ -1,4 +1,4 @@
- /******************************************************************************
+/******************************************************************************
  *
  * Module: DIO Header
  *
@@ -21,8 +21,8 @@
 #define OK 1
 #define NOK 0
 
-uint8 Dio_init(void);
-uint8 Dio_read(uint8 port,uint8 pin,uint8 * val);
-uint8 Dio_write(uint8 port,uint8 pin,uint8 val);
+extern uint8 Dio_init(void);
+extern uint8 Dio_read(uint8 port,uint8 pin,uint8 * val);
+extern uint8 Dio_write(uint8 port,uint8 pin,uint8 val);
 
 #endif /* DIO_H_ */

@@ -16,8 +16,8 @@
 #include "dio.h"
 
 /*
- * Function Prototypes for Seven Segment
+ * Function Prototype for Seven Segment
  */
-void displayDigit(uint8 digit);
+extern void displayDigit(uint8 digit);
 
 #endif /* SEVEN_SEGMENT_H_ */
