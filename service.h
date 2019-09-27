@@ -10,7 +10,6 @@
  *
  *******************************************************************************/
 
-
 #ifndef SERVICE_H_
 #define SERVICE_H_
 
@@ -18,13 +17,13 @@
 #include "dio.h"
 #include "seven_segment.h"
 
-
- // Function Prototypes
+/*
+ * Function Prototypes
+ */
 
 void wait(void);
 void delay(uint32 delay,uint8 timer_type,void(*a_ptr)(void));
-//void start(uint8 id);
-//void stop(uint8 id);
+//PWM function
 
 #endif  SERVICE_H_
 

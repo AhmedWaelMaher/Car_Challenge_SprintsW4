@@ -21,7 +21,7 @@
 #endif
 
 #ifndef OK
-#define OK
+#define OK 1
 #endif
 
 #define MAX_NUM_OF_PINS (uint8)32

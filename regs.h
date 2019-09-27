@@ -13,6 +13,8 @@
 #ifndef DIO_REGS_H
 #define DIO_REGS_H
 
+#define NULL_PTR ((void*)0)
+
 #include "std_types.h"
 
 /* Definition for PORTA Registers */
@@ -64,13 +66,5 @@
 #define TCCR2  (*((volatile uint8*)0x45))
 #define TCNT2  (*((volatile uint8*)0x44))
 #define OCR2  (*((volatile uint8*)0x43))
-
-typedef enum
-{
-	pa0,pa1,pa2,pa3,pa4,pa5,pa6,pa7,
-	pb0,pb1,pb2,pb3,pb4,pb5,pb6,pb7,
-	pc0,pc1,pc2,pc3,pc4,pc5,pc6,pc7,
-	pd0,pd1,pd2,pd3,pd4,pd5,pd6,pd7,
-}pins_dec;
 
 #endif /* DIO_REGS_H */

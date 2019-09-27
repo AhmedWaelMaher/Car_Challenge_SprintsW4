@@ -15,6 +15,13 @@
 
 #include "std_types.h"
 
+#ifndef NOK
+#define NOK 0
+#endif
+#ifndef OK
+#define OK 1
+#endif
+
 /*
  * AVR timers : 3 (Timer0,Timer1,Timer2)
  */
@@ -84,7 +91,7 @@
 /*
  * Enabling and disabling the interrupts
  */
-#define ENABLE_POLLING 0
+#define DISABLE_ISR 0
 #define ENABLE_ISR     1
 
 /*
@@ -136,6 +143,27 @@
 #define NA 0xFF
 #endif
 
+#define PWM_8bit 1
+#define PWM_9bit 2
+#define PWM_10bit 3
+#define CTC_TIMER1 4
+#define FAST_8bit 5
+#define FAST_9bit 6
+#define FAST_10bit 7
+#define FREQUENCY_CORRECT1 8
+#define FREQUENCY_CORRECT2 9
+#define PWM_TIMER1 10
+#define PWM_TIMER_2 11
+#define CTC_TIMER1_2 12
+#define RESERVED 13
+#define FAST_PMW_TIMER1 14
+#define FAST_PWM_TIMER1_2 15
+
+#define OVF_USE 0
+#define ICR_USE 1
+#define OCRA_USE 2
+#define OCRB_USE 3
+
 /*
  * Structure containing Configuration of Timer Driver
  */
@@ -146,11 +174,11 @@ typedef struct {
 	uint8 Timer1_Mode;
 	uint8 Outcomp;
 	uint8 Outcomp_Mode;
-	uint8 Timer1_Outcomp;
-	uint8 Timer1_Outcomp_Mode;
 	uint8 Clk;
 	uint8 Prescaler;
-	uint8 ISR_POLL;
+	uint8 VAL;
+	uint8 ICRorOCRAorOCRB;
+	uint8 ISR_ENABLE;
 }Timer_Config;
 
 /*
